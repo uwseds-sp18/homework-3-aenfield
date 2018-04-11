@@ -1,4 +1,3 @@
-
 import pandas as pd
 import sqlite3
 
@@ -36,4 +35,3 @@ def create_dataframe(db_filename):
 if __name__ == '__main__':
     df = create_dataframe('../HW1-aenfield/class.db')
     print(df.shape)
-    print(test_create_dataframe(df, verbose=True))
