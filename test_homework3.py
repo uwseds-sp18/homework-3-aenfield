@@ -1,13 +1,13 @@
 import unittest
-from homework3 import create_dataframe  # not good generally but ok for one method here
+from homework3 import create_dataframe  # not good generally for namespace reasons but ok for one method here
 
-class CreateDataFrameMethods(unittest.TestCase):
+class TestCreateDataFrameMethods(unittest.TestCase):
 
     def setUp(self):
-        # create df with correct path
+        # let tests assume a df created with a correct path
         self.df = create_dataframe('../HW1-aenfield/class.db')
         
-    def test_has_only_correct_column_names(self):
+    def test_df_has_only_correct_column_names(self):
         # contains only the columns video_id, category_id, language
         expected_columns = ['video_id','category_id','language']
         for colname in expected_columns:
