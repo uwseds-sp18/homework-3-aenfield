@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 import sqlite3
 
@@ -6,6 +8,9 @@ def create_dataframe(db_filename):
     Creates a dataframe by concatenating the tables in the database specified
     by db_filename, following the specific instructions in the homework.
     """
+    if not os.path.exists(db_filename):
+        raise ValueError(f"'{db_filename}' doesn't exist.")
+    
     conn = sqlite3.connect(db_filename)	
     
     sql = """
@@ -21,16 +26,8 @@ def create_dataframe(db_filename):
     ;
     """
 
-    # sqlite3.connect doesn't raise an error if the path to the database
-    # is invalid - it only fails when you try to use the connection
-    # to actually execute a query; we'll catch the failure here and re-raise
-    # as the homework-specified ValueError
-    try:
-        return pd.read_sql_query(sql, conn)
-    except pd.io.sql.DatabaseError:
-        raise ValueError("Failed executing query with specified database path.")
+    return pd.read_sql_query(sql, conn)
 
-    return df
 
 if __name__ == '__main__':
     df = create_dataframe('../HW1-aenfield/class.db')
